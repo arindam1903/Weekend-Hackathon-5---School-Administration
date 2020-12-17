@@ -8,7 +8,7 @@ var studentArray = [{
     id: 2,
     name: 'Minakshi',
     currentClass: 12,
-    division: 'C'
+    division: 'C' 
 },
 {
     id: 3,
