@@ -38,9 +38,23 @@ if(!student.name ||!student.currentClass||!student.division){
 studentArray.push(student);
 res.send({"id":student.id});
 });
- /*
+ 
+app.put('/api/student/:id',(req,res)=>{
+  const student=studentArray.find((el)=>el.id===parseInt(req.params.id));
+  if(!student||){
+    sendStatus(400);
+    return;
+  }
+  const studentIndex=(studentArray.indexOf(student));
+  const newStudent={
+    id:student.id,...student,...req.body 
+  };
+  newStudent.currentClass=parseInt(req.body.currentClass);
+  studentArray.splice(studentIndex,1,newStudent);
+  res.send(newStudent.name);
 
-app.put("/api/student/:id", (req, res) => {
+});
+/*app.put("/api/student/:id", (req, res) => {
   const studentId = req.params.id;
 
   const student = studentArray.find((el) => el.id === parseInt(studentId));
