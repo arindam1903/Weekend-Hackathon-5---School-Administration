@@ -47,7 +47,7 @@ app.put('/api/student/:id',(req,res)=>{
   }
   const studentIndex=(studentArray.indexOf(student));
   const newStudent={
-    id:student.id,...student,...req.body 
+    ...student,...req.body 
   };
   newStudent.currentClass=parseInt(req.body.currentClass);
   studentArray.splice(studentIndex,1,newStudent);
