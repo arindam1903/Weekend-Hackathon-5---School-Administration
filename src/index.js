@@ -47,12 +47,15 @@ app.put('/api/student/:id',(req,res)=>{
   }
   const studentIndex=(studentArray.indexOf(student));
   const newStudent={
-    ...student,...req.body 
-  };
+    ...student,...req.body
+  }; 
+  studentArray[studentIndex]={...studentArray[studentIndex],...req.body};
+  res.send(studentArray);
+  /*
   newStudent.currentClass=parseInt(req.body.currentClass);
   studentArray.splice(studentIndex,1,newStudent);
-  res.send(newStudent.name);
-
+  res.send(studentArray[5]);
+*/
 });
 /*app.put("/api/student/:id", (req, res) => {
   const studentId = req.params.id;
