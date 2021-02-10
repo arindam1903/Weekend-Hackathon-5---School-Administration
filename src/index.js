@@ -39,25 +39,7 @@ studentArray.push(student);
 res.send({"id":student.id});
 });
  
-app.put('/api/student/:id',(req,res)=>{
-  const student=studentArray.find((el)=>el.id===parseInt(req.params.id));
-  if(!student){
-    res.sendStatus(400);
-    return;
-  }
-  const studentIndex=(studentArray.indexOf(student));
-  const newStudent={
-    ...student,...req.body
-  }; 
-  studentArray[studentIndex]={...studentArray[studentIndex],...req.body};
-  res.send(studentArray);
-  /*
-  newStudent.currentClass=parseInt(req.body.currentClass);
-  studentArray.splice(studentIndex,1,newStudent);
-  res.send(studentArray[5]);
-*/
-});
-/*app.put("/api/student/:id", (req, res) => {
+app.put("/api/student/:id", (req, res) => {
   const studentId = req.params.id;
 
   const student = studentArray.find((el) => el.id === parseInt(studentId));
@@ -116,7 +98,7 @@ app.delete("/api/student/:id", (req, res) => {
 
   studentArray.splice(studentIndex, 1);
   res.send(student);
-});*/
+});
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
 
