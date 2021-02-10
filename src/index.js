@@ -41,7 +41,7 @@ res.send({"id":student.id});
  
 app.put('/api/student/:id',(req,res)=>{
   const student=studentArray.find((el)=>el.id===parseInt(req.params.id));
-  if(!student||){
+  if(!student){
     sendStatus(400);
     return;
   }
