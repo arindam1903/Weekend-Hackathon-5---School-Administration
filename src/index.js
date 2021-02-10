@@ -2,9 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const port = 8080;
-const studentArray = require("./InitialData.js");
-
-var http = require("http");
+const studentArray=require('./InitialData')
 app.use(express.urlencoded());
 
 // Parse JSON bodies (as sent by API clients)
@@ -12,42 +10,35 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // your code goes here
-app.get("/api/student", (req, res) => {
+
+app.get('/api/student',(req,res)=>{
   res.send(studentArray);
 });
-
-app.get("/api/student/:id", (req, res) => {
-  const studentId = req.params.id;
-
-  const student = studentArray.find((el) => el.id === parseInt(studentId));
-
-  if (!student) {
-    res.status(404).send();
+app.get('/api/student/:id',(req,res)=>{
+  let id=req.params.id;
+  const student=studentArray.find((el)=>el.id===parseInt(id));
+  if (!student){
+    res.sendStatus(404);
     return;
   }
   res.send(student);
 });
 
-app.post("/api/student", (req, res) => {
-  const student = {
-    id: studentArray[studentArray.length - 1].id + 1,
-    ...req.body,
-    currentClass: parseInt(req.body.currentClass)
-  };
-
-  if (!student.name || !student.currentClass || !student.division) {
-    //res.setHeader('{"content-type":"application/x-www-form-urlencoded"}');
-    res.status(400).send();
-    return;
-  }
-
-  studentArray.push(student);
-
-  //res.setHeader(['{"content-type":"application/x-www-form-urlencoded"}']);
-  let id = student.id;
-  // res.json({"id" : +id});
-  res.send({ id: id });
+app.post('/api/student',(req,res)=>{
+const student={
+id: studentArray[studentArray.length-1].id+1,
+name:req.body.name,
+currentClass:parseInt(req.body.currentClass),
+division:req.body.division
+};
+if(!student.name ||!student.currentClass||!student.division){
+  res.sendStatus(400);
+  return;
+}
+studentArray.push(student);
+res.send({"id":student.id});
 });
+ /*
 
 app.put("/api/student/:id", (req, res) => {
   const studentId = req.params.id;
@@ -108,7 +99,7 @@ app.delete("/api/student/:id", (req, res) => {
 
   studentArray.splice(studentIndex, 1);
   res.send(student);
-});
+});*/
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
 
