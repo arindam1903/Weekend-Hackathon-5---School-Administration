@@ -29,7 +29,7 @@ const student={
 id: studentArray[studentArray.length-1].id+1,
 name:req.body.name,
 currentClass:parseInt(req.body.currentClass),
-division:req.body.division
+division:req.body.division 
 };
 if(!student.name ||!student.currentClass||!student.division){
   res.sendStatus(400);
